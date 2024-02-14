@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.2 on win32)" generated="2024-02-14T14:21:38.020906" rpa="false" schemaversion="5">
+<suite id="s1" name="Heroku" source="C:\dev\robot-scripts\herokuapp\Tests\Heroku.robot">
+<test id="s1-t1" name="Verify Broken Images" line="27">
+<kw name="Start Web Test" owner="Common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:38.380897" level="INFO">Opening browser 'ff' to base url 'about:blank'.</msg>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-02-14T14:21:38.380897" elapsed="5.319918"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:43.700815" level="INFO">Opening url 'https://the-internet.herokuapp.com/'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2024-02-14T14:21:43.700815" elapsed="1.619434"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:38.379868" elapsed="6.940381"/>
+</kw>
+<kw name="Verify Landing Page" owner="Herokuapp">
+<kw name="Landing Page loaded" owner="Landing">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${LandingPageTitle}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.321246" elapsed="0.009975"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:45.320249" elapsed="0.010972"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:45.320249" elapsed="0.010972"/>
+</kw>
+<kw name="Select Test Link" owner="Herokuapp">
+<kw name="Select Test Link" owner="Landing">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:45.333216" level="INFO">Clicking element 'xpath=//*[@id="content"]/ul/li[4]/a'.</msg>
+<arg>${TestLink}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.332218" elapsed="0.218541"/>
+</kw>
+<arg>${TestLink}</arg>
+<status status="PASS" start="2024-02-14T14:21:45.332218" elapsed="0.218541"/>
+</kw>
+<arg>${BrokenImages}</arg>
+<status status="PASS" start="2024-02-14T14:21:45.332218" elapsed="0.218541"/>
+</kw>
+<kw name="Verify Broken Images Page" owner="Herokuapp">
+<kw name="BrokenImages Page loaded" owner="BrokenImages">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${BrokenImagesTitle}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.551757" elapsed="0.003988"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:45.550759" elapsed="0.004986"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:45.550759" elapsed="0.004986"/>
+</kw>
+<kw name="Validate Broken Images" owner="Herokuapp">
+<kw name="Validate Broken Images" owner="BrokenImages">
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:45.560730" level="INFO">@{images} = [ &lt;selenium.webdriver.remote.webelement.WebElement (session="3d22a535-91ae-41c9-9c6b-17bf0d684c46", element="9bb9c73e-3313-4713-99c4-09eed63a2c46")&gt; | &lt;selenium.webdriver.remote.webelement.WebElement ...</msg>
+<var>@{images}</var>
+<arg>${BrokenImageContainer}//img</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.556770" elapsed="0.003960"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:45.568321" level="INFO">${imageSrc} = https://the-internet.herokuapp.com/asdf.jpg</msg>
+<var>${imageSrc}</var>
+<arg>${image}</arg>
+<arg>src</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.561729" elapsed="0.006592"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="HEAD" owner="RequestsLibrary">
+<msg time="2024-02-14T14:21:46.581678" level="INFO">HEAD Request : url=https://the-internet.herokuapp.com/asdf.jpg 
+ path_url=/asdf.jpg 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-02-14T14:21:46.581678" level="INFO">HEAD Response : url=https://the-internet.herokuapp.com/asdf.jpg 
+ status=404, reason=Not Found 
+ headers={'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1707945706&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=IzmcHRmPQZUv%2FvlnuFcx%2FYUZoC3uPs3cYZeKJZPhiC4%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1707945706&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=IzmcHRmPQZUv%2FvlnuFcx%2FYUZoC3uPs3cYZeKJZPhiC4%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'Connection': 'keep-alive', 'Content-Type': 'text/html;charset=utf-8', 'X-Cascade': 'pass', 'Content-Length': '18', 'X-Xss-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'Server': 'WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)', 'Date': 'Wed, 14 Feb 2024 21:21:46 GMT', 'Set-Cookie': 'rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiRWRjZmQxNGVjM2E1ZDhmYmNkMzA4%0AYzc5MjcwNTM2MWM3OTQyZjFlYWJkNjFkMTkyNWEyYjhkZTc4ZDBmMzViNmEG%0AOwBGSSIJY3NyZgY7AEZJIiU5NDlmZDM2NWY0MGEzZjQ4ZGQxYWFmNjQ5OTI5%0AZTYxMgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi04NGEwMjRkMGJlMjgwOWIwZTgwMzkwOTFmODY5YzM0ZWZlN2MzMGUx%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLWRhMzlhM2VlNWU2%0AYjRiMGQzMjU1YmZlZjk1NjAxODkwYWZkODA3MDkGOwBG%0A--70ffd678c60a684f12e181e0f3241cdc23559a93; path=/; HttpOnly', 'Via': '1.1 vegur'} 
+ body=None 
+ </msg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a HEAD request.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.569352" elapsed="1.013324"/>
+</kw>
+<msg time="2024-02-14T14:21:46.582676" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<var>${resp}</var>
+<arg>HEAD</arg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2024-02-14T14:21:45.568321" elapsed="1.014355"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-02-14T14:21:46.583673" level="INFO">&lt;Response [404]&gt;</msg>
+<arg>${resp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-02-14T14:21:46.583673" elapsed="0.000997"/>
+</kw>
+<if>
+<branch type="IF" condition="${resp.status_code} != 200">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-02-14T14:21:46.587663" level="INFO">${count} = 1</msg>
+<var>${count}</var>
+<arg>${count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-02-14T14:21:46.586664" elapsed="0.000999"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:46.584670" elapsed="0.003990"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>${imageSrc}</arg>
+<arg>is not broken only ${count} broken images found</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-02-14T14:21:46.588660" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-02-14T14:21:46.588660" elapsed="0.000996"/>
+</branch>
+<status status="PASS" start="2024-02-14T14:21:46.584670" elapsed="0.004986"/>
+</if>
+<var name="${image}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3d22a535-91ae-41c9-9c6b-17bf0d684c46", element="9bb9c73e-3313-4713-99c4-09eed63a2c46")&gt;</var>
+<status status="PASS" start="2024-02-14T14:21:45.560730" elapsed="1.028926"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:46.601669" level="INFO">${imageSrc} = https://the-internet.herokuapp.com/hjkl.jpg</msg>
+<var>${imageSrc}</var>
+<arg>${image}</arg>
+<arg>src</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2024-02-14T14:21:46.590654" elapsed="0.011015"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="HEAD" owner="RequestsLibrary">
+<msg time="2024-02-14T14:21:47.867588" level="INFO">HEAD Request : url=https://the-internet.herokuapp.com/hjkl.jpg 
+ path_url=/hjkl.jpg 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-02-14T14:21:47.868575" level="INFO">HEAD Response : url=https://the-internet.herokuapp.com/hjkl.jpg 
+ status=404, reason=Not Found 
+ headers={'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1707945707&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=0DJb%2B9cirBonpbRmE0uY8cWi6UXDodYxJmb2sPT38Bo%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1707945707&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=0DJb%2B9cirBonpbRmE0uY8cWi6UXDodYxJmb2sPT38Bo%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'Connection': 'keep-alive', 'Content-Type': 'text/html;charset=utf-8', 'X-Cascade': 'pass', 'Content-Length': '18', 'X-Xss-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'Server': 'WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)', 'Date': 'Wed, 14 Feb 2024 21:21:47 GMT', 'Set-Cookie': 'rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiRTQyZTJkODBlMmY3ZDc2MDVjMGQ1%0AOGEwM2U4YWFlYjM2Mjk0NzE0OTQ4ZmFjYzA1ODM2NGU3ZDRjMzBjMjNiNmMG%0AOwBGSSIJY3NyZgY7AEZJIiVkOWJkOTM1ZDQ1ZGU1MDJmMDNjMTVkMzllNWJh%0AMzFjYgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi04NGEwMjRkMGJlMjgwOWIwZTgwMzkwOTFmODY5YzM0ZWZlN2MzMGUx%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLWRhMzlhM2VlNWU2%0AYjRiMGQzMjU1YmZlZjk1NjAxODkwYWZkODA3MDkGOwBG%0A--479e2659dc7ffb3e0f5cee7a95ded0f814b3d5a4; path=/; HttpOnly', 'Via': '1.1 vegur'} 
+ body=None 
+ </msg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a HEAD request.</doc>
+<status status="PASS" start="2024-02-14T14:21:46.602667" elapsed="1.265908"/>
+</kw>
+<msg time="2024-02-14T14:21:47.870572" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<var>${resp}</var>
+<arg>HEAD</arg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2024-02-14T14:21:46.601669" elapsed="1.268903"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-02-14T14:21:47.871520" level="INFO">&lt;Response [404]&gt;</msg>
+<arg>${resp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-02-14T14:21:47.871520" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${resp.status_code} != 200">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-02-14T14:21:47.872547" level="INFO">${count} = 2</msg>
+<var>${count}</var>
+<arg>${count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-02-14T14:21:47.871520" elapsed="0.001027"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:47.871520" elapsed="0.001027"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>${imageSrc}</arg>
+<arg>is not broken only ${count} broken images found</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-02-14T14:21:47.872547" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-02-14T14:21:47.872547" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-02-14T14:21:47.871520" elapsed="0.001027"/>
+</if>
+<var name="${image}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3d22a535-91ae-41c9-9c6b-17bf0d684c46", element="502dd4ef-0cce-4cdc-b041-bf68f7b9f7e4")&gt;</var>
+<status status="PASS" start="2024-02-14T14:21:46.590654" elapsed="1.281893"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2024-02-14T14:21:47.876508" level="INFO">${imageSrc} = https://the-internet.herokuapp.com/img/avatar-blank.jpg</msg>
+<var>${imageSrc}</var>
+<arg>${image}</arg>
+<arg>src</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2024-02-14T14:21:47.872547" elapsed="0.003961"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="HEAD" owner="RequestsLibrary">
+<msg time="2024-02-14T14:21:48.847017" level="INFO">HEAD Request : url=https://the-internet.herokuapp.com/img/avatar-blank.jpg 
+ path_url=/img/avatar-blank.jpg 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-02-14T14:21:48.847017" level="INFO">HEAD Response : url=https://the-internet.herokuapp.com/img/avatar-blank.jpg 
+ status=200, reason=OK 
+ headers={'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1707945708&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=su2iBZusWpwXYsQZ4C5LK3vJNth90%2B8SGyM4WNFnnLc%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1707945708&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=su2iBZusWpwXYsQZ4C5LK3vJNth90%2B8SGyM4WNFnnLc%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'Connection': 'keep-alive', 'Content-Type': 'image/jpeg', 'Last-Modified': 'Mon, 15 Feb 2021 17:29:38 GMT', 'Content-Length': '2464', 'X-Content-Type-Options': 'nosniff', 'Server': 'WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)', 'Date': 'Wed, 14 Feb 2024 21:21:48 GMT', 'Set-Cookie': 'rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiRTJmYjZhMmRhZWEwYTAwYzU3NzI4%0AMzE0NWEzMzc2M2E3NTJhMzhjNTlmOThlYWNkYmZmZTg1YWYzMjQxMjFlOWYG%0AOwBGSSIJY3NyZgY7AEZJIiUwNzFlMGUxODQ2MWU5YzE2NmEzMDBmOWJjYTBi%0AZWQ4MQY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi04NGEwMjRkMGJlMjgwOWIwZTgwMzkwOTFmODY5YzM0ZWZlN2MzMGUx%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLWRhMzlhM2VlNWU2%0AYjRiMGQzMjU1YmZlZjk1NjAxODkwYWZkODA3MDkGOwBG%0A--ab73743021b8ffbeba88659d719bf0821a994d6a; path=/; HttpOnly', 'Via': '1.1 vegur'} 
+ body=None 
+ </msg>
+<msg time="2024-02-14T14:21:48.848017" level="FAIL">Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404</msg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a HEAD request.</doc>
+<status status="FAIL" start="2024-02-14T14:21:47.876508" elapsed="0.988263">Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404</status>
+</kw>
+<msg time="2024-02-14T14:21:48.868720" level="INFO">${resp} = None</msg>
+<var>${resp}</var>
+<arg>HEAD</arg>
+<arg>url=${imageSrc}</arg>
+<arg>expected_status=404</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2024-02-14T14:21:47.876508" elapsed="0.993241">Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-02-14T14:21:48.870748" level="INFO">None</msg>
+<arg>${resp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-02-14T14:21:48.869749" elapsed="0.000999"/>
+</kw>
+<if>
+<branch type="IF" condition="${resp.status_code} != 200">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${count}</var>
+<arg>${count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2024-02-14T14:21:48.872748" elapsed="0.000000"/>
+</kw>
+<msg time="2024-02-14T14:21:48.873746" level="FAIL">Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</msg>
+<status status="FAIL" start="2024-02-14T14:21:48.870748" elapsed="0.002998">Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>${imageSrc}</arg>
+<arg>is not broken only ${count} broken images found</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-02-14T14:21:48.874701" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-02-14T14:21:48.873746" elapsed="0.000955"/>
+</branch>
+<status status="FAIL" start="2024-02-14T14:21:48.870748" elapsed="0.003953">Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</if>
+<var name="${image}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3d22a535-91ae-41c9-9c6b-17bf0d684c46", element="7ac02811-e68a-4a50-b034-c470667f7f37")&gt;</var>
+<status status="FAIL" start="2024-02-14T14:21:47.872547" elapsed="1.002154">Several failures occurred:
+
+1) Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404
+
+2) Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</iter>
+<var>${image}</var>
+<value>@{images}</value>
+<status status="FAIL" start="2024-02-14T14:21:45.560730" elapsed="3.313971">Several failures occurred:
+
+1) Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404
+
+2) Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</for>
+<status status="FAIL" start="2024-02-14T14:21:45.556770" elapsed="3.318928">Several failures occurred:
+
+1) Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404
+
+2) Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</kw>
+<status status="FAIL" start="2024-02-14T14:21:45.555745" elapsed="3.319953">Several failures occurred:
+
+1) Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404
+
+2) Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</kw>
+<kw name="End Web Test" owner="Common" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2024-02-14T14:21:48.877692" elapsed="2.658784"/>
+</kw>
+<status status="PASS" start="2024-02-14T14:21:48.877692" elapsed="2.658784"/>
+</kw>
+<doc>This test verifies the broken images</doc>
+<tag>1002</tag>
+<tag>Functional</tag>
+<status status="FAIL" start="2024-02-14T14:21:38.378900" elapsed="13.158631">Several failures occurred:
+
+1) Url: https://the-internet.herokuapp.com/img/avatar-blank.jpg Expected status: 200 != 404
+
+2) Invalid IF condition: Evaluating expression '${resp.status_code} != 200' failed: Resolving variable '${resp.status_code}' failed: AttributeError: 'NoneType' object has no attribute 'status_code'</status>
+</test>
+<doc>This is a test suite for the Herokuapp</doc>
+<status status="FAIL" start="2024-02-14T14:21:38.022896" elapsed="13.520498"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">1002</stat>
+<stat pass="0" fail="1" skip="0">Functional</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Heroku">Heroku</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
